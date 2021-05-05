@@ -83,8 +83,8 @@
     <button id=result type="button" onclick="myFunction()"  class="btn my-4 btn btn-success">Oblicz</button>
     
     
-    <p id="good" style="color:green;"></p>
-    <p id="bad" style="color:red;"></p>
+    <p id="alert" class="text-success"></p>
+    
 
   </main>
 
@@ -110,12 +110,21 @@
             let typeOfFuel = document.getElementsByName('typeOfFuel');
 
             for(i = 0; i < typeOfFuel.length; i++) {
-                if(typeOfFuel[i].checked && monthlyCost <350) {
-                document.getElementById("good").innerHTML
-                        = "Wydajesz na "+ typeOfFuel[i].value + " do auta " + monthlyCost + " zł miesiecznie.";
+                if(typeOfFuel[i].checked && monthlyCost <=350) {
+
+                    document.getElementById("alert").innerHTML= 
+                    "Wydajesz na "+ typeOfFuel[i].value + " do auta " + monthlyCost + " zł miesiecznie.";
+                    $('#alert').addClass('text-success');
+                    $('#alert').removeClass('text-danger');
+
+
                 }else if(typeOfFuel[i].checked && monthlyCost >350) {
-                    document.getElementById("bad").innerHTML
-                        = "Wydajesz na "+ typeOfFuel[i].value + " do auta " + monthlyCost + " zł miesiecznie.";
+
+                    document.getElementById("alert").innerHTML= 
+                    "Wydajesz na "+ typeOfFuel[i].value + " do auta " + monthlyCost + " zł miesięcznie.";
+                    $('#alert').addClass('text-danger');
+                    $('#alert').removeClass('text-success');
+                   
                 }
             }        
         }
