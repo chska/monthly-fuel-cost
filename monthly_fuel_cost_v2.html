@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+  <title>Kalkulator kosztów </title>
+</head>
+
+<body>
+  <main class="container">
+
+
+    <h2 class="d-flex justify-content-start text-#fd7e14 my-5">
+      <strong id="kalkulator">Kalkulator miesięcznych kosztów paliwa</strong>
+    </h2>
+
+
+
+
+
+
+   
+    <div class="row">
+      <div class="col">
+
+        <label type=text class="text-success fw-bold">
+          Ilość przejeżdżanych miesięcznie kilometrów:
+        </label> <br>
+        <input type="number" id="kilometres" class="w-25 p-3 rounded-pill border border-3"><br>
+
+        <label type=text class="text-success fw-bold">
+          Aktualny koszt litra paliwa:
+        </label> <br>
+        <input type="number" id="prise" class="w-25 p-3 rounded-pill border border-3">
+
+       
+
+      </div>
+    </div>
+
+    
+
+    <div type="text" class="text-success fw-bold">
+      Rodzaj paliwa:
+    </div>
+
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="typeOfFuel" value="benzyna" checked>
+      <label class="form-check-label" for="exampleRadios1">
+        Benzyna
+      </label>
+
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="typeOfFuel" value="olej napędowy">
+      <label class="form-check-label" for="exampleRadios2">
+        Olej napędowy
+      </label>
+    </div>
+
+
+
+    <form>
+      <div class="form-row align-items-center">
+        <div class="col-auto my-1">
+          <label type=text class="text-success fw-bold">Przybliżone spalanie auta:</label> <br>
+          <select id="averageConsumption" class="w-25 p-3 rounded-pill border border-3" >
+            <option class="w-25 p-3 rounded-pill border border-3" value="0.05">5l/100</option>
+            <option value="0.08">8l/100</option>
+            <option value="0.1">10l/100</option>
+          </select>
+      </div>
+    </form>
+
+    <button id=result type="button" onclick="myFunction()"  class="btn my-4 btn btn-success">Oblicz</button>
+    
+    
+    <p id="alert" class="text-success"></p>
+    
+
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+    <script>
+
+        function myFunction() {
+
+            let kilometres = $('#kilometres').val();
+            console.log(kilometres + " km");
+
+            let prise = $('#prise').val();
+            console.log(prise + " zł");
+
+            let averageConsumption = document.getElementById('averageConsumption').value;
+            console.log(averageConsumption);
+
+            let monthlyCost = kilometres * prise * averageConsumption
+            console.log(monthlyCost);
+
+            let typeOfFuel = document.getElementsByName('typeOfFuel');
+
+            for(i = 0; i < typeOfFuel.length; i++) {
+                if(typeOfFuel[i].checked && monthlyCost <=350) {
+
+                    document.getElementById("alert").innerHTML= 
+                    "Wydajesz na "+ typeOfFuel[i].value + " do auta " + monthlyCost + " zł miesiecznie.";
+                    $('#alert').addClass('text-success');
+                    $('#alert').removeClass('text-danger');
+
+
+                }else if(typeOfFuel[i].checked && monthlyCost >350) {
+
+                    document.getElementById("alert").innerHTML= 
+                    "Wydajesz na "+ typeOfFuel[i].value + " do auta " + monthlyCost + " zł miesięcznie.";
+                    $('#alert').addClass('text-danger');
+                    $('#alert').removeClass('text-success');
+                   
+                }
+            }        
+        }
+           
+
+
+
+
+    </script>
+
+</body>
+
+</html>
